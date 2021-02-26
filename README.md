@@ -8,7 +8,7 @@
 ![alt text][logo]
 ##  2. This is the Github Pages link to my web map
 https://timmeng19.github.io/472Lab1/map.html
-
+The Mapbox style file can be found in the main page of this repo
 
 ## 3. Below is my reflective analysis and associated references
 
