@@ -1,8 +1,8 @@
-# 472Lab1
+# 472Lab1 - Haotian Meng
 
 ![alt text][logo]
 
-[logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
+[logo]: https://github.com/TimMeng19/472Lab1/blob/main/Screenshot%20-%20Web%20Map.png "Screenshot of the map"
 
 
 
