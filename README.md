@@ -2,7 +2,8 @@
 
 ![alt text][logo]
 
-## 1. This is a screenshot of my web-map
+## 1. This is a screenshot of my web-map:
+
 [logo]: https://github.com/TimMeng19/472Lab1/blob/main/Screenshot%20-%20Web%20Map.png "Screenshot of the map"
 
 ##  2. This is the Github Pages link to my web map
