@@ -2,16 +2,16 @@
 
 
 
-## 1. This is a screenshot of my web-map:
+## 1. A screenshot of the web map:
 
 [logo]: https://github.com/TimMeng19/472Lab1/blob/main/Screenshot%20-%20Web%20Map.png "Screenshot of the map"
 ![alt text][logo]
-##  2. This is the Github Pages link to my web map
+##  2. The Github Pages link to the web map
 https://timmeng19.github.io/472Lab1/map.html
 
 The Mapbox style file can be found in the main page of this repo
 
-## 3. Below is my reflective analysis and associated references
+## 3. The Reflective Analysis and associated references
 
 Web cartography – Reflective Analysis
 Haotian Meng, 27949163
