@@ -1,2 +1,7 @@
 # 472Lab1
-This is the lab 1 web map of GEOB 472
+
+
+
+
+
+https://timmeng19.github.io/472Lab1/map.html
