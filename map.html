@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="utf-8">
+  <title>Display a map with a custom style</title>
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css" rel="stylesheet">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js"></script>
+
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #map {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    h2,
+    h3 {
+      margin: 10px;
+      font-size: 1.2em;
+    }
+
+    h3 {
+      font-size: 1em;
+    }
+
+    p {
+      font-size: 0.85em;
+      margin: 10px;
+      text-align: left;
+    }
+
+    /**
+* Create a position for the map
+* on the page */
+    #map {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+    }
+
+    /**
+* Set rules for how the map overlays
+* (information box and legend) will be displayed
+* on the page. */
+    .map-overlay {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.8);
+      margin-right: 20px;
+      font-family: Arial, sans-serif;
+      overflow: auto;
+      border-radius: 3px;
+    }
+
+    #features {
+      top: 0;
+      height: 100px;
+      margin-top: 10px;
+      width: 700px;
+    }
+
+    #legend {
+      padding: 10px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      line-height: 25px;
+      height: 200px;
+      margin-bottom: 20px;
+      width: 170px;
+      text-align: center;
+    }
+
+    #pd {
+      position: relative;
+      top: 800px;
+      left: 36%;
+      padding: 10px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      line-height: 20px;
+      height: 100px;
+      margin-bottom: 30px;
+      width: 30%;
+      text-align: center;
+      border: none;
+    }
+
+
+    .legend-key {
+      display: inline-block;
+      border-radius: 100%;
+      width: 10px;
+      height: 10px;
+      margin-right: 5px;
+      text-align: center;
+    }
+
+    #legend2 {
+      position: absolute;
+      padding: 10px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      line-height: 20px;
+      height: 200px;
+      margin-bottom: 20px;
+      margin-right:220px;
+      width: 170px;
+      text-align: center;
+
+    }
+
+    .legend2-key {
+      display: inline-block;
+      border-radius: 100%;
+      border: 1px solid black;
+      width: 10px;
+      height: 10px;
+      margin-right: 5px;
+    }
+
+
+
+    #fit {
+      display: block;
+      position: relative;
+      left: 46.5%;
+      top: 485px;
+      margin: 2px auto;
+      width: 5%;
+      height: 5%;
+      padding: 10px;
+      border: none;
+      border-radius: 3px;
+      font-size: 12px;
+      text-align: center;
+      color: #fff;
+      background: #ee8a65;
+    }
+
+    #menu {
+      display: block;
+      position: relative;
+      left: 41.25%;
+      top: 430px;
+      margin: 2px auto;
+      width: 4.5%;
+      height: 5%;
+      padding: 0;
+      border: none;
+      border-radius: 3px;
+      font-size: 12px;
+      text-align: center;
+      color: #fff;
+      background: #ffffff;
+      border: 2px solid #ee8a65;
+    }
+
+    #menu a {
+      font-size: 13px;
+      color: #404040;
+      display: block;
+      margin: 0;
+      padding: 0;
+      padding: 10px;
+      text-decoration: none;
+      border-color: 1px solid #ee8a65;
+      text-align: center;
+    }
+
+    #menu a:last-child {
+      border: none;
+    }
+
+    #menu a:hover {
+      background-color: #f8f8f8;
+      color: #404040;
+    }
+
+    #menu a.active {
+      background-color: #ee8a65;
+      color: #ffffff;
+    }
+
+    #menu a.active:hover {
+      background: #f27546;
+    }
+
+    #menu06 {
+      display: block;
+      position: relative;
+      left: 36.25%;
+      top: 375px;
+      margin: 2px auto;
+      width: 4.5%;
+      height: 5%;
+      padding: 0;
+      border: none;
+      border-radius: 3px;
+      font-size: 12px;
+      text-align: center;
+      color: #fff;
+      background: #ffffff;
+      border: 2px solid #ee8a65;
+    }
+
+    #menu06 b {
+      font-size: 13px;
+      color: #404040;
+      display: block;
+      margin: 0;
+      padding: 0;
+      padding: 10px;
+      text-decoration: none;
+      border-color: 1px solid #ee8a65;
+      text-align: center;
+    }
+
+    #menu06 b:last-child {
+      border: none;
+    }
+
+    #menu06 b:hover {
+      background-color: #f8f8f8;
+      color: #404040;
+    }
+
+    #menu06 b.active {
+      background-color: #ee8a65;
+      color: #ffffff;
+    }
+
+    #menu06 b.active:hover {
+      background: #f27546;
+    }
+
+
+
+
+    var map=new mapboxgl.Map( {
+        container: 'map', // container id
+        style: 'mapbox://styles/timmeng/cklg1xo9p5sod17no3609k9b8' // replace this with your style URL
+      }
+
+    );
+  </style>
+
+</head>
+
+
+
+<body>
+
+  <div id='map'></div>
+  <div class='map-overlay' id='features'>
+    <h2>Comparing All Professional Stadiums With At Least 10,000 Capacity to Gross Disposable Household Income (GDHI) in the Great Britain</h2>
+    <div>
+      <p>Haotian Meng, GEOB 472, 2021</p>
+    </div>
+  </div>
+  <div class='map-overlay' id='legend'>
+    <h3>Types of Stadium<br></h3>
+  </div>
+  <div class='map-overlay' id='legend2'>
+    <h3>GDHI (£ million)<br></h3>
+  </div>
+
+
+
+  <div class='map-overlay' id='pd'>
+
+  </div>
+
+  <button id="fit">Fit to full extent</button>
+  <button id="menu"></button>
+  <button id="menu06"></button>
+
+
+
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoidGltbWVuZyIsImEiOiJja2xmN3F5NDMzcjFyMm9ucnBjZDYxd2o3In0.SqHvra71P3s8BS3MUyNFaw';
+    var map = new mapboxgl.Map({
+      container: 'map', // container id
+      style: 'mapbox://styles/timmeng/cklg1xo9p5sod17no3609k9b8', // custom style url from https://studio.mapbox.com/
+      center: [0, 55], // starting position
+      zoom: 4 // starting zoom
+    });
+
+//show layers
+    map.on('load', function() {
+      var layers = ['Football', 'Cricket', 'Rugby', 'Tennis', 'Athletic', 'Multi-Purpose'];
+      var colors = ['#a65961', '#405568', '#be8246', '#c4e4b9', '#73c7de', '#b89bbf'];
+
+      for (i = 0; i < layers.length; i++) {
+        var layer = layers[i];
+        var color = colors[i];
+        var item = document.createElement('div');
+        var key = document.createElement('span');
+        key.className = 'legend-key';
+        key.style.backgroundColor = color;
+
+        var value = document.createElement('span');
+        value.innerHTML = layer;
+        item.appendChild(key);
+        item.appendChild(value);
+        legend.appendChild(item);
+      }
+  });
+
+map.on('load', function() {
+      var layers2 = ['0-2000', '2000-4000', '4000-6000', '6000-8000', '8000-10000', '10000-12000', '12000-14000','14000+'];
+      var colors2 = ['#fff7fb', '#ece7f2', '#d0d1e6', '#a6bddb', '#74a9cf', '#0570b0', '#045a8d', '#023a5a'];
+
+      for (i = 0; i < layers2.length; i++) {
+        var layer2 = layers2[i];
+        var color2 = colors2[i];
+        var item2 = document.createElement('div');
+        var key2 = document.createElement('span');
+        key2.className = 'legend2-key';
+        key2.style.backgroundColor = color2;
+
+        var value2 = document.createElement('span');
+        value2.innerHTML = layer2;
+        item2.appendChild(key2);
+        item2.appendChild(value2);
+        legend2.appendChild(item2);
+      }
+    });
+
+
+//change mouse into a pointer
+    map.on('mouseenter', 'point', function() {
+      map.getCanvas().style.cursor = 'pointer';
+    });
+
+    // Change it back to a pointer when it leaves.
+    map.on('mouseleave', 'point', function() {
+      map.getCanvas().style.cursor = '';
+    });
+
+
+//popups
+    map.on('click', function(e) {
+      var stadiums = map.queryRenderedFeatures(e.point, {
+        layers: ['point']
+      });
+      var markerHeight = 10,
+        markerRadius = 10,
+        linearOffset = 200;
+      var popupOffsets = {
+        'top': [0, 0],
+        'top-left': [0, 0],
+        'top-right': [0, 0],
+        'bottom': [0, -markerHeight],
+        'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+        'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+        'left': [markerRadius, (markerHeight - markerRadius) * -1],
+        'right': [-markerRadius, (markerHeight - markerRadius) * -1]
+      };
+
+
+      if (stadiums.length > 0) {
+        new mapboxgl.Popup({
+            offset: popupOffsets,
+            closeButton: false
+          })
+          .setLngLat(stadiums[0].geometry.coordinates)
+          .setHTML("<strong>Stadium Name:</strong>" + "\n" +
+            stadiums[0].properties.Stadium +
+            "<br>" +
+            "<strong> City:</strong>" + "\n" +
+            stadiums[0].properties.Location +
+            "<br>" +
+            "<strong> Capacity:</strong>" + "\n" +
+            stadiums[0].properties.Capacity +
+            "<br>" +
+            "<strong> Type of Stadium:</strong>" + "\n" +
+            stadiums[0].properties.Sport +
+            "<br>" +
+            "<strong> Home of:</strong>" + "\n" +
+            stadiums[0].properties.ClubTeam)
+          .setMaxWidth("300px")
+          .addTo(map);
+      }
+    });
+
+
+//hover effect for points
+
+    map.on('mousemove', function(e) {
+      var stadiums = map.queryRenderedFeatures(e.point, {
+        layers: ['point']
+      });
+
+      if (stadiums.length > 0) {
+        document.getElementById('pd').innerHTML = '<h2><strong>' +
+          stadiums[0].properties.Stadium +
+          '</strong></h2><p><center>' +
+          'Maximum capacity:<em><strong>' + "\n" +
+          stadiums[0].properties.Capacity +
+          '</strong></em> people</p>' +
+          '<p><center> Stadoim Location:' + "\n" +
+          stadiums[0].properties.Location;
+      } else {
+        document.getElementById('pd').innerHTML =
+          "<h2><strong>Hover over or click on a stadium!</strong></h2><h5>Click on the income button to show or hide the Household Income layer (2016)</h6>";
+      }
+    });
+
+
+
+//fit button
+    document.getElementById('fit').addEventListener('click', function() {
+      map.fitBounds([
+        [-13.001782074982953, 48.02192094323287], //long and lat for the bottom left corner of my extent
+        [3.709256719093444, 59.88012275050752] //long and lat for the top right corner of my extent
+      ]);
+    });
+
+
+//show/hide income layer
+    var toggleableLayerIds = ['Income 2016'];
+
+    for (var i = 0; i < toggleableLayerIds.length; i++) {
+      var id = toggleableLayerIds[i];
+
+      var link = document.createElement('a');
+      link.href = '#';
+      link.className = 'inactive';
+      link.textContent = id;
+
+      link.onclick = function(e) {
+        var clickedLayer = this.textContent;
+        e.preventDefault();
+        e.stopPropagation();
+
+        var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
+
+        // toggle layer visibility by changing the layout object's visibility property
+        if (visibility === 'visible') {
+          map.setLayoutProperty(clickedLayer, 'visibility', 'none');
+          this.className = '';
+        } else {
+          this.className = 'active';
+          map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+        }
+      };
+
+      var layers = document.getElementById('menu');
+      layers.appendChild(link);
+    }
+
+
+
+
+    var toggleableLayerIds06 = ['Income 2006'];
+
+    for (var i = 0; i < toggleableLayerIds06.length; i++) {
+      var id06 = toggleableLayerIds06[i];
+
+      var link06 = document.createElement('b');
+      link06.href = '#';
+      link06.className = 'inactive';
+      link06.textContent = id06;
+
+      link06.onclick = function(e) {
+        var clickedLayer06 = this.textContent;
+        e.preventDefault();
+        e.stopPropagation();
+
+        var visibility06 = map.getLayoutProperty(clickedLayer06, 'visibility');
+
+        // toggle layer visibility by changing the layout object's visibility property
+        if (visibility06 === 'visible') {
+          map.setLayoutProperty(clickedLayer06, 'visibility', 'none');
+          this.className = '';
+        } else {
+          this.className = 'active';
+          map.setLayoutProperty(clickedLayer06, 'visibility', 'visible');
+        }
+      };
+
+      var layers06 = document.getElementById('menu06');
+      layers06.appendChild(link06);
+    }
+  </script>
+
+
+
+
+
+
+</body>
+
+</html>
