@@ -22,11 +22,12 @@ After using the Mapbox Studio, I used the Mapbox GL JS and Atom.io to further en
 In conclusion, I used Mapbox Studio to style basic elements and then used Mapbox GL JS, Atom.io and the HTML programming language to build interactivity and complete this web map. To further improve my map, inserting an image of each stadium into each popup window can bring a better sense to viewers about each stadium feature. I tried to reach this goal, however, I failed since I am not able to retrieve image from the Internet to the local hosted webpage. Another enhancement I can make in the future is to change the qualitative stadium point data to a proportional symbol layer with the stadium capacity being the value, and still represents the same qualitative data (stadium type). Afterall, there are still many places could be enhanced better in this map.
 
 Reference:
-	Baade, R. A., & Dye, R. F. (1988). Sports stadiums and area development: A critical review. Sage Publications. https://doi.org/10.1177/089124248800200306
 
-	Millward, P. (2013). New football directors in the twenty-first century: Profit and revenue in the english premier league's transnational age. Leisure Studies, 32(4), 399-414. https://doi.org/10.1080/02614367.2012.673130
+1. Baade, R. A., & Dye, R. F. (1988). Sports stadiums and area development: A critical review. Sage Publications. https://doi.org/10.1177/089124248800200306
 
-	Lee, A. (2021). The Guide to Map Design. Mapbox. https://go.mapbox.com/rs/117-NXK-490/images/the-guide-to-map-design.pdf
+2. Millward, P. (2013). New football directors in the twenty-first century: Profit and revenue in the english premier league's transnational age. Leisure Studies, 32(4), 399-414. https://doi.org/10.1080/02614367.2012.673130
+
+3. Lee, A. (2021). The Guide to Map Design. Mapbox. https://go.mapbox.com/rs/117-NXK-490/images/the-guide-to-map-design.pdf
 
 
 Data Source:
